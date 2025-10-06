@@ -24,11 +24,26 @@ public class Main {
         }
 
 
-        System.out.println("\n=== TEST 2: seller findAll ===");
+        System.out.println("\n=== TEST 3: seller findAll ===");
         list = sellerDao.findAll();
         for(Seller obj: list){
             System.out.println(obj);
         }
+
+        System.out.println("\n=== TEST 4: seller Insert ===");
+        Seller newSeller = new Seller(null, "Fall", "fall@gmail.com", new Date(), 4900.00, department);
+        sellerDao.insert(newSeller);
+        System.out.println("Inserted! New id = " + newSeller.getId());
+
+
+
+
+
+
+
+
+
+
 
     }
 }
