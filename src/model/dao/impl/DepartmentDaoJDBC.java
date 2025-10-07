@@ -4,12 +4,14 @@ import db.DB;
 import db.DbException;
 import model.dao.DepartmentDao;
 import model.entities.Department;
+import model.entities.Seller;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +26,11 @@ public class DepartmentDaoJDBC implements DepartmentDao {
     @Override
     public void insert(Department obj) {
         PreparedStatement st = null;
+
         try{
+            if(existsByName(obj.getName())){
+                throw new DbException("Department already exists! No rows affected");
+            }
             st = conn.prepareStatement(
                     "INSERT INTO department (Name) "
                     + "VALUES (?)",
@@ -57,6 +63,8 @@ public class DepartmentDaoJDBC implements DepartmentDao {
         }
 
     }
+
+
 
     @Override
     public void update(Department obj) {
@@ -131,6 +139,15 @@ public class DepartmentDaoJDBC implements DepartmentDao {
 
     private Department instantiateDepartment(ResultSet rs) throws SQLException {
         return new Department(rs.getInt("Id"), rs.getString("Name"));
+    }
+
+    private boolean existsByName(String name) throws SQLException {
+        PreparedStatement st = conn.prepareStatement(
+                "SELECT 1 FROM department WHERE Name = ?"
+        );
+        st.setString(1, name);
+        ResultSet rs = st.executeQuery();
+        return rs.next();
     }
 
 }
