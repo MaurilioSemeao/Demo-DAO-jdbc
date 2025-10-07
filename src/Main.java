@@ -45,7 +45,7 @@ public class Main {
         System.out.println("Update! Completed ");
 
 
-        System.out.println("\n=== TEST 6: seller Update ===");
+        System.out.println("\n=== TEST 6: seller Delete ===");
         System.out.print("Enter id for delete test: ");
         Scanner sc = new Scanner(System.in);
         int id = sc.nextInt();
