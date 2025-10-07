@@ -5,6 +5,7 @@ import model.entities.Seller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 public class MainDepartment {
     public static void main(String[] args){
@@ -32,6 +33,15 @@ public class MainDepartment {
         department.setName("Home");
         departmentDao.update(department);
         System.out.println("Update! Completed ");
+
+        System.out.println("\n=== TEST 5: seller Delete ===");
+        System.out.print("Enter id for delete test: ");
+        Scanner sc = new Scanner(System.in);
+        int id = sc.nextInt();
+        departmentDao.deleteById(id);
+        System.out.println("Delete Completed");
+
+        sc.close();
 
 
 
